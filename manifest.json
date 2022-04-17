@@ -1,0 +1,29 @@
+{
+  "name": "Playlist Maker from Beatsaver",
+  "manifest_version": 3,
+  "version": "0.0.1",
+  "description": "beatsaver.com の検索結果から playlist を作成します。",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "scripting",
+    "tabs",
+    "downloads"
+  ],
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "icons": {
+    "48": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://beatsaver.com/*"
+      ],
+      "js": [
+        "content_scripts.js"
+      ]
+    }
+  ]
+}

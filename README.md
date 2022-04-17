@@ -3,6 +3,7 @@
 ## 概要
 - beatsaver.com で検索した結果から playlist を作成する Chrome 拡張プラグインです。
 - **生成する対象は現在表示されている曲だけです。検索結果のすべてを対象にしたい場合、下に画面をスクロールして全曲表示させてから実行してください。**
+- これを使用したことによる損害について責任は持てませんのであしからず。
 
 ## インストール手順
 1. [Release ページ](https://github.com/ranmd9a/BSPlaylistMaker/releases/latest)から最新の BSPlaylistMaker.zip をダウンロードして、任意のディレクトリに展開してください。

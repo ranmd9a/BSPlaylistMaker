@@ -26,7 +26,8 @@
 
 ## 使い方
 1. Chrome で beatsaver.com を開き、検索してください。
-2. 検索結果を一番したまで表示してください。
+2. 検索結果を一番下まで表示してください。
+   ※表示されているところまでが対象でよいなら一番下までいかなくてもいいです。
 3. 右上の Playlist Maker from Beatsaver のアイコンをクリックして「検索結果から playlist を作成」をクリックしてください。
    <p><img src="docs/images/003.png" width="750px" alt="save playlist"></p>
 4. 「search_result_20220417-0920.bplist」のようなファイル名で playlist がダウンロードされます。  

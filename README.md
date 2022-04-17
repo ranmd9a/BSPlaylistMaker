@@ -30,5 +30,6 @@
 3. 右上の Playlist Maker from Beatsaver のアイコンをクリックして「検索結果から playlist を作成」をクリックしてください。
    <p><img src="docs/images/003.png" width="750px" alt="save playlist"></p>
 4. 「search_result_20220417-0920.bplist」のようなファイル名で playlist がダウンロードされます。  
-   Beatsaber インストールディレクトリの Playlists フォルダに格納して、ゲーム内もしくは beatlist などで曲をダウンロードしてください。
- 
+   Beatsaber インストールディレクトリの Playlists フォルダに格納して、ゲーム内もしくは beatlist などで曲をダウンロードしてください。  
+   なお、playlistAuthor や playlist のカバー画像は設定していないのでそれらも適宜 beatlist などで編集してください。
+

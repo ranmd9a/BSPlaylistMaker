@@ -1,4 +1,4 @@
-const DEBUG = true;
+const DEBUG = false;
 
 function paddingZero(n) {
 	return `0${n}`.slice(-2);
@@ -56,13 +56,27 @@ function createPlaylist() {
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-	if (request !== 'create-playlist') {
-		console.warn(`Unknown request`);
-		sendResponse();
-		return;
-	};
-
-	const result = createPlaylist();
-	sendResponse(result);
+	let result;
+	switch (request.id) {
+		case 'create-playlist':
+			result = createPlaylist();
+			sendResponse(result);
+			break;
+		case 'revoke-object-url':
+			// service worker 内では URL.revokeObjectURL() が使用できないのでここで破棄
+			try {
+				URL.revokeObjectURL(request.url);
+				console.log(`revoked: ${request.url}`);
+			} catch (error) {
+				// log only
+				console.warn(error);
+			}
+			sendResponse();
+			break;
+		default:
+			console.warn(`Unknown request`);
+			sendResponse();
+			break;
+	}
 	return;
 });

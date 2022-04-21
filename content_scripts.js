@@ -66,7 +66,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 			// service worker 内では URL.revokeObjectURL() が使用できないのでここで破棄
 			try {
 				URL.revokeObjectURL(request.url);
-				console.log(`revoked: ${request.url}`);
+				if (DEBUG) {
+					console.log(`revoked: ${request.url}`);
+				}
 			} catch (error) {
 				// log only
 				console.warn(error);

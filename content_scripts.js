@@ -6,41 +6,46 @@ function paddingZero(n) {
 
 function createNowText() {
 	const now = new Date();
-	let text = `${now.getFullYear()}${paddingZero(now.getMonth() + 1)}`
+	const text = `${now.getFullYear()}${paddingZero(now.getMonth() + 1)}`
 		+ `${paddingZero(now.getDate())}-${paddingZero(now.getHours())}${paddingZero(now.getMinutes())}`;
 	return text;
 }
 
 function createPlaylist() {
-	const result = [];
 	const searchResult = document.body.getElementsByClassName("search-results");
-	if (searchResult != null) {
-		const beatmaps = searchResult[0].getElementsByClassName("beatmap");
-		if (DEBUG) {
-			console.log(beatmaps?.length)
-		}
-		for (const beatmap of beatmaps) {
-			const link = beatmap.querySelector("div.body .links a[title='Download zip']");
-			if (link?.href == null) {
-				continue;
-			}
-			// ダウンロードURL から hash を取得
-			const downloadUrl = new URL(link.href);
-			let filename = downloadUrl.pathname;
-			const idx = filename.lastIndexOf('/');
-			if (idx >= 0) {
-				filename = filename.substring(idx + 1);
-			}
-			if (filename.toUpperCase().endsWith(".ZIP")) {
-				filename = filename.substring(0, filename.length - 4);
-			}
-			result.push(filename);
-		}
+	if (searchResult == null || searchResult.length === 0) {
+		// 検索結果がない場合は何もしない
+		return { error: 'No data' };
 	}
+
+	const hashList = [];
+
+	const beatmaps = searchResult[0].getElementsByClassName("beatmap");
+	if (DEBUG) {
+		console.log(beatmaps?.length)
+	}
+	for (const beatmap of beatmaps) {
+		const link = beatmap.querySelector("div.body .links a[title='Download zip']");
+		if (link?.href == null) {
+			continue;
+		}
+		// ダウンロードURL から hash を取得
+		const downloadUrl = new URL(link.href);
+		let filename = downloadUrl.pathname;
+		const idx = filename.lastIndexOf('/');
+		if (idx >= 0) {
+			filename = filename.substring(idx + 1);
+		}
+		if (filename.toUpperCase().endsWith(".ZIP")) {
+			filename = filename.substring(0, filename.length - 4);
+		}
+		hashList.push(filename);
+	}
+
 	const nowText = createNowText();
 	const playlist = {
 		playlistTitle: `playlist ${nowText}`,
-		songs: result.map((hash) => {
+		songs: hashList.map((hash) => {
 			return {
 				hash
 			};
@@ -77,7 +82,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 			break;
 		default:
 			console.warn(`Unknown request`);
-			sendResponse();
+			sendResponse({ error: `Unknown request` });
 			break;
 	}
 	return;

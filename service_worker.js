@@ -26,6 +26,9 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 			const response = chrome.tabs.sendMessage(tab.id, { id: 'create-playlist' }, options);
 
 			response.then((result) => {
+				if (result == null || result.error != null) {
+					return;
+				}
 				const downloadCallback = (downloadId) => {
 					if (downloadId == null) {
 						// downloadId が undefined の場合失敗している。
@@ -33,7 +36,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 						console.warn(`download failed.`);
 						// 続行
 					}
-					// 使用した OjbectURL を破棄
+					// 使用した ObjectURL を破棄
 					chrome.tabs.sendMessage(tab.id, { id: 'revoke-object-url', url: result.url }, options);
 				};
 				chrome.downloads.download({

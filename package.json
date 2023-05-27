@@ -1,10 +1,10 @@
 {
   "name": "bs-playlistmaker",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -rf dist && mkdir dist && cp -p *.js dist && cp -p manifest.json dist && cp -p icon.png dist"
   },
   "author": "ranmd9a",
   "license": "MIT"

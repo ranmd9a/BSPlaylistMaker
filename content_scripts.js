@@ -25,7 +25,7 @@ function createPlaylist() {
 		console.log(beatmaps?.length)
 	}
 	for (const beatmap of beatmaps) {
-		const link = beatmap.querySelector("div.body .links a[title='Download zip']");
+		const link = beatmap.querySelector("div.content .links a[title='Download zip']");
 		if (link?.href == null) {
 			continue;
 		}
